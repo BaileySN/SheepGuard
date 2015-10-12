@@ -1,0 +1,41 @@
+{% extends "sheepguard/base.html" %}
+{% block content %}
+<div class="col-lg-2 col-md-2 col-sm-3">
+           <div class="list-group table-of-contents">
+               <a class="list-group-item" href="{% url 'sheep:pasture_new' %}"> <i class="glyphicon glyphicon-plus"></i> Weideplatz Hinzufügen</a>
+               <a class="list-group-item" href="{% url 'sheep:sheep_list' %}"> <i class="glyphicon glyphicon-list"></i> Schafe</a>
+{#               <a class="list-group-item" href="{% url 'phones:provider_list' %}"> <i class="glyphicon glyphicon-list"></i> Anbieter</a>#}
+{#               <a class="list-group-item" href="{% url 'phones:phoneuser_list' %}"> <i class="glyphicon glyphicon-list"></i> Benutzer</a>#}
+{#               <a class="list-group-item" href="{% url 'itverwaltung:company_list' %}"> <i class="glyphicon glyphicon-list"></i> Firmengruppe</a>#}
+           </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="table table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Ort</th>
+                <th style="text-align: center"></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in pasture_list %}
+                <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.place }}</td>
+                <td><a class="btn btn-info" href="{% url 'sheep:pasture_edit' item.id %}" role="button">
+                <span class="glyphicon glyphicon-edit"></span> Bearbeiten </a>
+                <a class="btn btn-danger" href="{% url 'sheep:pasture_delete' item.id %}" role="button">
+                    <i class="glyphicon glyphicon-remove"></i> Löschen</a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock %}

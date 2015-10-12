@@ -1,0 +1,13 @@
+{% extends "sheepguard/base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+    <h2>Abnehmer entfernen</h2>
+        <form class="form-horizontal" action="" method="post">
+            {% csrf_token %}
+            <h3>Möchten Sie den Abnehmer "{{ object.lname }} | {{ object.fname }}" wirklich löschen ?</h3>
+            <input class="btn btn-danger" type="submit" value="Ja, Löschen"/>
+        </form>
+</div>
+</div>
+{% endblock %}

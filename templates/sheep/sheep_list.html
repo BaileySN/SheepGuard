@@ -1,0 +1,53 @@
+{% extends "sheepguard/base.html" %}
+{% block content %}
+<script src="{{ STATIC_URL }}js/table-filter.js" type="text/javascript"></script>
+<div class="col-lg-2 col-md-2 col-sm-3">
+           <div class="list-group table-of-contents">
+               <a class="list-group-item" href="{% url 'sheep:sheep_new' %}"> <i class="glyphicon glyphicon-plus"></i> Schaf hinzufügen</a>
+               <a class="list-group-item" href="{% url 'sheep:pasture_list' %}"> <i class="glyphicon glyphicon-list"></i> Weideplatz</a>
+{#               <a class="list-group-item" href="{% url 'phones:customer_list' %}"> <i class="glyphicon glyphicon-list"></i> Anbieter</a>#}
+{#               <a class="list-group-item" href="{% url 'phones:phoneuser_list' %}"> <i class="glyphicon glyphicon-list"></i> Benutzer</a>#}
+{#               <a class="list-group-item" href="{% url 'itverwaltung:company_list' %}"> <i class="glyphicon glyphicon-list"></i> Firmengruppe</a>#}
+           </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="input-group"> <span class="input-group-addon">Suchbegriff</span>
+
+        <input id="filter" type="search" class="form-control light-table-filter" data-table="order-table" placeholder="">
+    </div>
+    <div class="table table-responsive">
+        <table class="table table-bordered table-hover order-table">
+            <thead>
+            <tr>
+                <th style="text-align: center">Nummer</th>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Status</th>
+                <th style="text-align: center">Weideplatz</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in sheep_list %}
+                {% if item.state.id == "LEB" %}
+                    <tr>
+                {% elif item.state.id == "TOD" %}
+                    <tr class="bg-danger">
+                {% endif %}
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.fk_pasture_ground }}</td>
+                <td><a class="btn btn-info" href="{% url 'sheep:sheep_edit' item.id %}" role="button">
+                <span class="glyphicon glyphicon-edit"></span> Bearbeiten </a>
+                <a class="btn btn-danger" href="{% url 'sheep:sheep_delete' item.id %}" role="button">
+                    <i class="glyphicon glyphicon-remove"></i> Löschen</a>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock %}
