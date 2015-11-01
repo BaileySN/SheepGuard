@@ -43,9 +43,15 @@ class Pasture(models.Model):
 
 
 class Color(models.Model):
+    class Meta:
+        ordering = ['name']
+
     name = models.CharField(max_length=50, verbose_name=u'Farbe')
 
 class Sheep(models.Model):
+    class Meta:
+        ordering = ['code']
+
     code = models.IntegerField(unique=True, verbose_name=u'Fortlaufender Code', default=code_gen)
     name = models.CharField(max_length=150, blank=True, verbose_name=u'Name')
     birthdate = models.DateField(verbose_name=u'Geburtsdatum', blank=True)

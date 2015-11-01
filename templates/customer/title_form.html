@@ -4,10 +4,11 @@
 
     <div class="row">
         <h2 style="text-align: center">Anrede Bearbeiten / Hinzufügen</h2>
-        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
+
                 <label class="control-label col-xs-3">{{ field.label }}</label>
                 <div class="col-xs-9">
                     {{ field }}
